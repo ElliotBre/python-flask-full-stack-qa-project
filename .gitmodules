@@ -1,0 +1,6 @@
+[submodule "flask_app"]
+	path = flask_app
+	url = git@github.com:ElliotBre/flask_app.git
+[submodule "postgres_db"]
+	path = postgres_db
+	url = git@github.com:ElliotBre/postgres_db.git
