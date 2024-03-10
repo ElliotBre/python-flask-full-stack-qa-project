@@ -5,7 +5,7 @@ node {
         withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                             sh "cp \$ENV .env"
         }
-        sh "git clone git@github.com:ElliotBre/qa_project.git;ls -a; mv .env qa_project; cd qa_project; ls -a; docker compose up"
+        sh "git clone git@github.com:ElliotBre/qa_project.git; mv .env qa_project; cd qa_project; ls -a; docker compose down; docker compose up"
     }
     stage ("Create build output") {
 
