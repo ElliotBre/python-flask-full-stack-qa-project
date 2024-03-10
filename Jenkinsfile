@@ -3,7 +3,7 @@ node {
 
         sh "mkdir -p output"
 
-        writefile file: "output/test.txt", text: "this file is a test"
+        writeFile file: "output/test.txt", text: "this file is a test"
     }
 
     stage ("Archive build artifacts") {
