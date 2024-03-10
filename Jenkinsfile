@@ -1,7 +1,7 @@
 node {
     stage ("Startup app") {
         sh "rm -rf qa_project"
-        sh "git clone git@github.com:ElliotBre/qa_project.git;ls -a; mv .env qa_project; cd qa_project; ls -a; docker compose up"
+        sh "curl -v --path-as-is localhost/ebi212/documents/projects/.env -o .env; echo git clone git@github.com:ElliotBre/qa_project.git;ls -a; mv .env qa_project; cd qa_project; ls -a; docker compose up"
     }
     stage ("Create build output") {
 
