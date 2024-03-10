@@ -1,7 +1,7 @@
 node {
     stage ("Clone git repo") {
         sh "rm -rf qa_project"
-        sh "git clone git@github.com:ElliotBre/qa_project.git"
+        sh "git clone git@github.com:ElliotBre/qa_project.git; ls -a"
         sh "ls -a"
     }
     stage ("Startup app"){
