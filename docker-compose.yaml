@@ -54,6 +54,8 @@ services:
       - type: bind
         source: ./nginx.conf
         target: /etc/nginx/nginx.conf
+        bind:
+          create_host_path: true
     depends_on:
      - app
 volumes:
