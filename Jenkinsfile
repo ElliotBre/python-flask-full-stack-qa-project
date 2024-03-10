@@ -6,6 +6,10 @@ node {
                             sh "cp \$ENV .env"
         }
         sh "ls -a"
+        checkout scmGit(
+            branches: [[name: 'main']],
+            userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
+        sh "ls -a"
     }
     stage ("Create build output") {
 
