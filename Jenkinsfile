@@ -1,4 +1,8 @@
 node {
+
+    stage ("Startup app"){
+        sh "docker compose up"
+    }
     stage ("Create build output") {
 
         sh "mkdir -p output"
