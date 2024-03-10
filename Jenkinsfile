@@ -2,8 +2,8 @@ node {
     stage ("Startup app") {
         sh "rm -rf qa_project"
         sh "touch .env"
-        withCredentials([file(credentialsId: '.env', variable: '.env')]){
-                            sh "cp \$.env .env"
+        withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                            sh "cp \$ENV .env"
         }
         sh "git clone git@github.com:ElliotBre/qa_project.git;ls -a; mv .env qa_project; cd qa_project; ls -a; docker compose up"
     }
