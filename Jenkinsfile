@@ -1,12 +1,7 @@
 node {
-    stage ("Clone git repo") {
+    stage ("Startup app") {
         sh "rm -rf qa_project"
-        sh "git clone git@github.com:ElliotBre/qa_project.git; ls -a"
-        sh "ls -a"
-    }
-    stage ("Startup app"){
-        sh "ls -a"
-        sh "docker compose up"
+        sh "git clone git@github.com:ElliotBre/qa_project.git; cd qa_project; docker compose up"
     }
     stage ("Create build output") {
 
