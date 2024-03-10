@@ -1,5 +1,5 @@
 node {
-    stage ("Startup app") {
+    stage ("Setup") {
         sh "rm -rf qa_project"
         sh "ls -a"
         checkout scmGit(
@@ -11,7 +11,11 @@ node {
                             sh "cp \$ENV .env"
         }
         sh "ls -a"
-        sh "docker compose up"
+    }
+    stage ("build") {
+        docker {
+            build('project')
+        }
     }
     stage ("Create build output") {
 
