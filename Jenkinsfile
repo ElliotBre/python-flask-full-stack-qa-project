@@ -1,4 +1,9 @@
 node {
+    agent any
+    tools {
+    
+    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
+    }
     stage ("Setup") {
         sh "rm -rf qa_project"
         sh "ls -a"
@@ -13,9 +18,7 @@ node {
         sh "ls -a"
     }
     stage ("build") {
-        docker {
-            build('project')
-        }
+        sh "docker compose up"
     }
     stage ("Create build output") {
 
