@@ -1,8 +1,4 @@
 node {
-    tools {
-    
-    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
-    }
     stage ("Setup") {
         sh "rm -rf qa_project"
         sh "ls -a"
