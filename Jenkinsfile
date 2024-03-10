@@ -2,7 +2,7 @@ node {
     stage ("Startup app") {
         sh "rm -rf qa_project"
         withCredentials([string(credentialsId: '.env', variable: '.env')]){
-            sh "cat $.env"
+            sh "cat \$.env"
         }
         sh "git clone git@github.com:ElliotBre/qa_project.git;ls -a; mv .env qa_project; cd qa_project; ls -a; docker compose up"
     }
