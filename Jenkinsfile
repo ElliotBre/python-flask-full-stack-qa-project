@@ -1,6 +1,7 @@
 node {
     stage ("Clone git repo") {
-        sh "if ! [ cd qa_project]; then git clone git@github.com:ElliotBre/qa_project.git; fi"
+        sh "cd qa_project"
+        sh "if ! [ $? -eq 0 ]; then git clone git@github.com:ElliotBre/qa_project.git; fi"
     }
     stage ("Startup app"){
         sh "cd qa_project"
