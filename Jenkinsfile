@@ -3,6 +3,7 @@ node {
         sh "git clone git@github.com:ElliotBre/qa_project.git"
     }
     stage ("Startup app"){
+        sh "cd qa_project"
         sh "docker compose up"
     }
     stage ("Create build output") {
