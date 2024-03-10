@@ -11,6 +11,7 @@ node {
                             sh "cp \$ENV .env"
         }
         sh "ls -a"
+        sh "docker compose up"
     }
     stage ("Create build output") {
 
