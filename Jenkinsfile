@@ -1,10 +1,10 @@
 node {
     stage ("Clone git repo") {
         sh "cd qa_project"
-        sh "if ! [ \$? -eq 0 ]; then git clone git@github.com:ElliotBre/qa_project.git; fi"
+        sh "if ! [ \$? -eq 0 ]; then git clone git@github.com:ElliotBre/qa_project.git; cd qa_project; fi"
     }
     stage ("Startup app"){
-        sh "cd qa_project"
+        sh "ls -a"
         sh "docker compose up"
     }
     stage ("Create build output") {
