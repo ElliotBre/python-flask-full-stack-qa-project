@@ -1,4 +1,4 @@
-node {
+pipeline {
     stage ("Setup") {
         sh "rm -rf qa_project"
         sh "ls -a"
