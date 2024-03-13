@@ -40,17 +40,17 @@
 
 pipeline {
     agent {
-        docker {
-            image 'maven:latest' 
-        }
+        docker { image 'node:20.11.1-alpine3.19' }
     }
+    
     stages {
         stage('build') {
             steps {
-                sh "mvn clean compile"
-                // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
-                //         sh "cp \$ENV .env"
-                //         } 
+               sh 'cd postgres_db'
+               script {
+                app = docker.build .
+               }
+             } 
             }
         }
     }
