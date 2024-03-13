@@ -39,17 +39,19 @@
 // }
 
 pipeline {
-    agent {
-        docker { image 'node:20.11.1-alpine3.19' }
+    environment {
+    imagename = "kevalnagda/flaskapp"
+    dockerimage = ''
     }
-    
+    agent any
     stages {
         stage('build') {
             steps {
                sh 'cd postgres_db'
                script {
-                app = docker.build .
-                } 
+                dockerImage = docker.build imagename
+                }
             }
         }
+}
 }
