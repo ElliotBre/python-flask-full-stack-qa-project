@@ -39,17 +39,13 @@
 // }
 
 pipeline {
-    environment {
-    imagename = "kevalnagda/flaskapp"
-    dockerimage = ''
-    }
     agent any
     stages {
         stage('build') {
             steps {
                sh 'cd postgres_db'
                script {
-                dockerImage = docker.build imagename
+                dockerImage = docker.build mmbatteries/db:test
                 }
             }
         }
