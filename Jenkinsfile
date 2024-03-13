@@ -40,6 +40,11 @@
 
 pipeline {
     agent any
+    options {
+        withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                        sh "cp \$ENV .env"
+                        } 
+    }
     stages {
         stage('build') {
             agent { dockerfile {
