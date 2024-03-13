@@ -40,15 +40,14 @@
 
 pipeline {
     agent {
-        docker {
-            image 'maven:3-alpine' 
-        }
+        agent {
+        label 'docker-slave'
+    }
     }
     stages {
         stage('build') {
             steps {
-                sh 'echo "hello"'
-                sh 'mvn -B -DskipTests clean package'
+                sh "mvn clean compile"
                 // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                 //         sh "cp \$ENV .env"
                 //         } 
