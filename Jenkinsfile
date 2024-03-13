@@ -48,7 +48,7 @@ pipeline {
                         sh "cp \$ENV .env"
                         }
                 sh 'python --version'
-                docker 
+                
             }
         }
     }
