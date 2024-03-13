@@ -40,11 +40,6 @@
 
 pipeline {
     agent any
-    options {
-        withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
-                        sh "cp \$ENV .env"
-                        } 
-    }
     stages {
         stage('build') {
             agent { dockerfile {
@@ -54,9 +49,9 @@ pipeline {
                 args '-v db:/var/lib/postgres'
                  } }
             steps {
-                withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
-                        sh "cp \$ENV .env"
-                        } 
+                // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                //         sh "cp \$ENV .env"
+                //         } 
             }
         }
     }
