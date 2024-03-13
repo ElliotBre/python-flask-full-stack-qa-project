@@ -43,6 +43,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
+                withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                        sh "cp \$ENV .env"
+                        }
                 sh 'python --version'
             }
         }
