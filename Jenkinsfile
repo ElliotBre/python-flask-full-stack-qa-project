@@ -49,6 +49,7 @@ pipeline {
                 args '-v db:/var/lib/postgres'
                  } }
             steps {
+                sh 'echo "hello"'
                 // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                 //         sh "cp \$ENV .env"
                 //         } 
