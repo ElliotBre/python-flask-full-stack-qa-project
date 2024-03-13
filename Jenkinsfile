@@ -13,7 +13,7 @@ node {
         sh "ls -a"
     }
     stage ("build") {
-        docker compose up
+        docker.build()
     }
     stage ("Create build output") {
 
