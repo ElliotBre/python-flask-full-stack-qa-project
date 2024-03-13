@@ -21,19 +21,17 @@ pipeline {
              }
              stage ("Build") {
                 steps {
-                sh "cd postgres_db"
-                sh "docker-compose up"
+                
+                // sh "docker-compose up"
+                  sh 'sleep 10s'
                 }
              }
-            stage ("Create build output") {
-                steps {
-                    sh "mkdir -p output"
-                    writeFile file: "output/test.txt", text: "this file is a test"
-                }
             }
             stage ("Archive build artifacts") {
                 steps {
-                    archiveArtifacts artifacts: 'output/*.txt'
+                //    sh 'docker image push mmbatteries/db:1.5.0'
+                //    sh 'docker image push mmbatteries/app:1.'
+                  sh 'sleep 43s'
                 }
             }
         }
