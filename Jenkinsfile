@@ -3,6 +3,7 @@ pipeline {
     {
         stages {
             stage ("Setup") {
+                steps {
                 sh "rm -rf qa_project"
                 sh "ls -a"
                 checkout scmGit(
@@ -13,19 +14,26 @@ pipeline {
                     withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                         sh "cp \$ENV .env"
                         }
-                        sh "ls -a"
+                    sh "ls -a"
+                }
              }
              stage ("Build") {
+                steps {
                 sh "cd postgres_db"
                 sh "docker build -t mmbatteries/db:test -u jenkins ."
                 }
+             }
             stage ("Create build output") {
+                steps {
                 sh "mkdir -p output"
                 writeFile file: "output/test.txt", text: "this file is a test"
                 }
+            }
             stage ("Archive build artifacts") {
+                steps {
                 archiveArtifacts artifacts: 'output/*.txt'
                 }
+            }
         }
     }
 }
