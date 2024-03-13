@@ -13,7 +13,7 @@ node {
         sh "ls -a"
     }
     stage ("build") {
-        docker.build()
+        docker { image 'mmbatteries/db:test'}
     }
     stage ("Create build output") {
 
