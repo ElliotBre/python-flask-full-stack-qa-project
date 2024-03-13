@@ -39,16 +39,27 @@
 // }
 
 pipeline {
-   // agent { docker { image 'python:3.12.1-alpine3.19' } }
-    agent { dockerfile true }
+    agent any
+    agent { dockerfile {
+        filename 'Dockerfile'
+        dir 'postgres_db'
+        label 'epic-label'
+        additionalBuildArgs  '--build-arg version=1.0.2'
+        args '-v db:/var/lib/postgres'
+    } }
     stages {
         stage('build') {
+            agent { dockerfile {
+                filename 'Dockerfile'
+                dir 'postgres_db'
+                label 'epic-label'
+                additionalBuildArgs  '--build-arg version=1.0.2'
+                args '-v db:/var/lib/postgres'
+                 } }
             steps {
                 withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                         sh "cp \$ENV .env"
-                        }
-                sh 'python --version'
-                
+                        } 
             }
         }
     }
