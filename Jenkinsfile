@@ -12,8 +12,9 @@ node {
         }
         sh "ls -a"
     }
-    stage ("build") {
-        app = docker.build("mmbatteries/db:test")
+    stage ("Build") {
+        sh "cd postgres_db"
+        sh "docker build -t mmbatteries/db:test -u jenkins ."
     }
     stage ("Create build output") {
 
