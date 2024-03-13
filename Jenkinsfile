@@ -39,17 +39,17 @@
 // }
 
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
+    }
     stages {
         stage('build') {
-            agent { dockerfile {
-                filename 'Dockerfile'
-                dir 'postgres_db'
-                additionalBuildArgs  '--build-arg version=1.0.2'
-                args '-v db:/var/lib/postgres'
-                 } }
             steps {
                 sh 'echo "hello"'
+                sh 'mvn -B -DskipTests clean package'
                 // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                 //         sh "cp \$ENV .env"
                 //         } 
