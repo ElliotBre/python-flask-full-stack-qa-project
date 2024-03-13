@@ -40,9 +40,9 @@
 
 pipeline {
     agent {
-        agent {
-        label 'docker-slave'
-    }
+        docker {
+            image 'maven:latest' 
+        }
     }
     stages {
         stage('build') {
