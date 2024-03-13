@@ -26,7 +26,7 @@ pipeline {
                   sh 'sleep 10s'
                 }
              }
-            }
+            
             stage ("Archive build artifacts") {
                 steps {
                 //    sh 'docker image push mmbatteries/db:1.5.0'
@@ -35,6 +35,7 @@ pipeline {
                 }
             }
         }
+}
 
 
 
