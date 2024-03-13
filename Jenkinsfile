@@ -39,15 +39,16 @@
 // }
 
 pipeline {
-    agent any
+    agent { docker { image 'python:3.12.1-alpine3.19' } }
     stages {
         stage('build') {
             steps {
-               sh 'cd postgres_db'
-               script {
-                dockerImage = docker.build mmbatteries/db:test
-                }
+                // withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                //         sh "cp \$ENV .env"
+                //         }
+                sh 'python --version'
+                sh 'docker compose up'
             }
         }
-}
+    }
 }
