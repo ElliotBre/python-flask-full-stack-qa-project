@@ -40,13 +40,6 @@
 
 pipeline {
     agent any
-    agent { dockerfile {
-        filename 'Dockerfile'
-        dir 'postgres_db'
-        label 'epic-label'
-        additionalBuildArgs  '--build-arg version=1.0.2'
-        args '-v db:/var/lib/postgres'
-    } }
     stages {
         stage('build') {
             agent { dockerfile {
