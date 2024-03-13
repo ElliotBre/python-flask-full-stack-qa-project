@@ -39,7 +39,8 @@
 // }
 
 pipeline {
-    agent { docker { image 'python:3.12.1-alpine3.19' } }
+   // agent { docker { image 'python:3.12.1-alpine3.19' } }
+    agent { dockerfile true }
     stages {
         stage('build') {
             steps {
@@ -47,7 +48,7 @@ pipeline {
                         sh "cp \$ENV .env"
                         }
                 sh 'python --version'
-                sh 'docker compose up'
+                docker 
             }
         }
     }
