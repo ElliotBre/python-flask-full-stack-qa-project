@@ -49,8 +49,7 @@ pipeline {
                sh 'cd postgres_db'
                script {
                 app = docker.build .
-               }
-             } 
+                } 
             }
         }
-    }
+}
