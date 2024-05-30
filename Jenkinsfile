@@ -21,17 +21,27 @@ pipeline {
              }
              stage ("Build") {
                 steps {
-                
-                // sh "docker-compose up"
-                  sh 'sleep 10s'
+                    sh  "docker build -t mmbatteries/db:latest ./postgres_db"
+                    sh "docker build -t mmbatteries/app:latest ./flask_app"
                 }
              }
-            
+             stage ("Run") {
+                steps {
+
+                    sh "set -a
+                        . ./.env
+                        set +a"
+
+                    sh "docker run -p 5432:5432 --mount type=bind,source=db,target=/var/lib/postgres -e POSTGRES_USER=$DATABASE_USER -e POSTGRES_PASSWORD=$DATABASE_PASSWORD -e POSTGRES_NAME=$DATABASE_NAME"
+                    sh "docker run -p 5000:5000 —restart=always -e DATABASE_NAME=$DATABASE_NAME -e HOST=$DATABASE_HOST -e DATABASE_USER=$DATABASE_USER -e DATABASE_PASSWORD=$DATABASE_PASSWORD -e DATABASE_HOST=$DATABASE_HOST -e FLASK_ENV=$FLASK_ENV -e FLASK_APP=$FLASK_APP -e FLASK_DEBUG=$FLASK_DEBUG -e DATABASE_PORT=$DATABASE_PORT -e PORT=$PORT —mount type=bind,source=./flask_app,target=/app/"
+                    sh "docker run -p 80:80 --mount type=bind,source=./nginx.conf,target=/etc/nginx/nginx.conf nginx:latest"
+                    
+                }
+             }
             stage ("Archive build artifacts") {
                 steps {
-                //    sh 'docker image push mmbatteries/db:1.5.0'
-                //    sh 'docker image push mmbatteries/app:1.'
-                  sh 'sleep 43s'
+                    docker push mmbatteries/db:latest
+                    docker push mmbatteries/app:latest
                 }
             }
         }
