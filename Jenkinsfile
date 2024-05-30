@@ -35,13 +35,13 @@ pipeline {
                     sh "docker run -p 5432:5432 --mount type=bind,source=db,target=/var/lib/postgres -e POSTGRES_USER=$DATABASE_USER -e POSTGRES_PASSWORD=$DATABASE_PASSWORD -e POSTGRES_NAME=$DATABASE_NAME"
                     sh "docker run -p 5000:5000 —restart=always -e DATABASE_NAME=$DATABASE_NAME -e HOST=$DATABASE_HOST -e DATABASE_USER=$DATABASE_USER -e DATABASE_PASSWORD=$DATABASE_PASSWORD -e DATABASE_HOST=$DATABASE_HOST -e FLASK_ENV=$FLASK_ENV -e FLASK_APP=$FLASK_APP -e FLASK_DEBUG=$FLASK_DEBUG -e DATABASE_PORT=$DATABASE_PORT -e PORT=$PORT —mount type=bind,source=./flask_app,target=/app/"
                     sh "docker run -p 80:80 --mount type=bind,source=./nginx.conf,target=/etc/nginx/nginx.conf nginx:latest"
-                    
+
                 }
              }
             stage ("Archive build artifacts") {
                 steps {
-                    docker push mmbatteries/db:latest
-                    docker push mmbatteries/app:latest
+                    sh "docker push mmbatteries/db:latest"
+                    sh "docker push mmbatteries/app:latest"
                 }
             }
         }
