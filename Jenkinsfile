@@ -45,8 +45,9 @@ pipeline {
     post {
       always {
           sh "rm env.sh"
-          sh "docker network rm testing"
           sh "docker stop \$(docker ps -aq) && docker remove \$(docker ps -aq)"
+          sh "docker network rm testing"
+          sh "docker system prune"
       }
     }
 }
