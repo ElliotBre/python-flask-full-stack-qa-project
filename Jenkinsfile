@@ -18,9 +18,6 @@ pipeline {
                 }
              }
              stage ("Build") {
-                 environment {
-                HOME = "${env.WORKSPACE}"
-                }
                 steps {
                     sh "git submodule init"
                     sh "git submodule update"
@@ -29,11 +26,7 @@ pipeline {
                 }
              }
              stage ("Run") {
-                environment {
-                HOME = "${env.WORKSPACE}"
-                }
                 steps {
-
                     sh "set -a"
                     sh "pwd"
                     sh "ls -a"
@@ -48,9 +41,6 @@ pipeline {
                 }
              }
             stage ("Archive build artifacts") {
-                environment {
-                HOME = "${env.WORKSPACE}"
-                }
                 steps {
                     sh "docker push mmbatteries/db:latest"
                     sh "docker push mmbatteries/app:latest"
