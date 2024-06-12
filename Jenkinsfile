@@ -24,12 +24,18 @@ pipeline {
                 }
              }
              stage ("Build") {
+                environment {
+                HOME = "${env.WORKSPACE}"
+                }
                 steps {
                     sh  "docker build -t mmbatteries/db:latest ./postgres_db"
                     sh "docker build -t mmbatteries/app:latest ./flask_app"
                 }
              }
              stage ("Run") {
+                environment {
+                HOME = "${env.WORKSPACE}"
+                }
                 steps {
 
                     sh "set -a"
@@ -44,6 +50,9 @@ pipeline {
                 }
              }
             stage ("Archive build artifacts") {
+                environment {
+                HOME = "${env.WORKSPACE}"
+                }
                 steps {
                     sh "docker push mmbatteries/db:latest"
                     sh "docker push mmbatteries/app:latest"
