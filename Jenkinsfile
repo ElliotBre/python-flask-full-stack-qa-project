@@ -28,7 +28,6 @@ pipeline {
                 HOME = "${env.WORKSPACE}"
                 }
                 steps {
-                    sh "sudo systemctl start docker"
                     sh  "docker build -t mmbatteries/db:latest ./postgres_db"
                     sh "docker build -t mmbatteries/app:latest ./flask_app"
                 }
