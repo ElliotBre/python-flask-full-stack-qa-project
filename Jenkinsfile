@@ -7,6 +7,7 @@ pipeline {
         stages {
             stage ("Setup") {
                 steps {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
