@@ -5,6 +5,9 @@ pipeline {
     }
         stages {
             stage ("Setup") {
+                environment {
+                HOME = "${env.WORKSPACE}"
+                }
                 steps {
                     sh "rm -rf qa_project"
                     sh "ls -a"
