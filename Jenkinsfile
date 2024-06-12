@@ -3,16 +3,18 @@ pipeline {
         stages {
             stage ("Setup") {
                 steps {
-                    sh "rm -rf qa_project"
+                    sh "rm -rf temp"
                     sh "ls -a"
+                    sh "mkdir temp"
+                    sh "cd temp"
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
                         sh "ls -a"
                         sh "touch .env"
                         withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
-                            sh "echo \$ENV"
-                            sh "echo \$ENV >> env.txt"
+                            sh "cp \$ENV .env"
+                            sh "cat .env"
                         }
                         sh "ls -a"
                 }
@@ -28,10 +30,7 @@ pipeline {
              stage ("Run") {
                 steps {
                     sh "set -a"
-                    sh "pwd"
-                    sh "ls -a"
-                    sh "cat env.txt"
-                    sh "source env.txt"
+                    sh "source .env"
                     sh "set +a"
                     
                     sh "docker network create —driver=bridge testing"
