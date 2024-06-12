@@ -3,7 +3,6 @@ pipeline {
         stages {
             stage ("Setup") {
                 steps {
-                    sh "rm env.sh"
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
@@ -45,6 +44,7 @@ pipeline {
         }
     post {
       always {
+          sh "rm env.sh"
           sh "docker network rm testing"
           sh "docker stop \$(docker ps -aq) && docker remove \$(docker ps -aq)"
       }
