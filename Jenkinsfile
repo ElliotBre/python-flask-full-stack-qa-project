@@ -1,6 +1,6 @@
 pipeline {
     agent { 
-        any { image 'docker:latest' 
+         docker { image 'docker:latest' 
         } 
     }
         stages {
