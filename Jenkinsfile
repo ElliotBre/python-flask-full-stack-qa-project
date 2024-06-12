@@ -30,7 +30,7 @@ pipeline {
                     sh "set -a"
                     sh "pwd"
                     sh "ls -a"
-                    sh ". ./env.txt"
+                    sh "source env.txt"
                     sh "set +a"
                     
                     sh "docker network create —driver=bridge testing"
