@@ -29,9 +29,9 @@ pipeline {
              }
              stage ("Run") {
                 steps {
-                    sh "set -a"
-                    sh ". ./env.sh"
-                    sh "set +a"
+                    script {
+                       load './env.sh'
+                    }
                     
                     sh "docker network create --driver=bridge testing"
                     sh "docker run -p 5432:5432 --mount type=volume,source=db,target=/var/lib/postgres --hostname=db --name=db --network=testing -e POSTGRES_USER=$DATABASE_USER -e POSTGRES_PASSWORD=$DATABASE_PASSWORD -e POSTGRES_NAME=$DATABASE_NAME mmbatteries/db:latest"
