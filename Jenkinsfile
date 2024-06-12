@@ -28,8 +28,8 @@ pipeline {
                 HOME = "${env.WORKSPACE}"
                 }
                 steps {
-                    scripts {
-                    docker.build("test-image", "./postgres_db") 
+                    script {
+                     image = docker.build("test-image", "./postgres_db") 
                     }
                     sh  "docker build -t mmbatteries/db:latest ./postgres_db"
                     sh "docker build -t mmbatteries/app:latest ./flask_app"
