@@ -22,10 +22,7 @@ pipeline {
              }
              stage ("Build") {
                 steps {
-                    script {
-                     image = docker.build("test-image", "./postgres_db") 
-                    }
-                    sh  "docker build -t mmbatteries/db:latest ./postgres_db"
+                    sh  "docker build -u root -t mmbatteries/db:latest ./postgres_db"
                     sh "docker build -t mmbatteries/app:latest ./flask_app"
                 }
              }
