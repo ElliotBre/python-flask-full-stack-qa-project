@@ -14,6 +14,7 @@ pipeline {
                         sh "ls -a"
                         sh "touch .env"
                         withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
+                            sh "echo \$ENV"
                             sh "cp \$ENV .env"
                         }
                         sh "ls -a"
