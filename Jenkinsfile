@@ -29,8 +29,10 @@ pipeline {
              }
              stage ("Run") {
                 steps {
+                    sh "ls -a"
                     sh "set -a"
-                    sh "source .env"
+                    sh "pwd"
+                    sh ". ./.env"
                     sh "set +a"
                     
                     sh "docker network create —driver=bridge testing"
