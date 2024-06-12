@@ -12,7 +12,7 @@ pipeline {
                         sh "touch .env"
                         withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
                             sh "echo \$ENV"
-                            sh "echo \$ENV >> .env"
+                            sh "echo \$ENV >> env.txt"
                         }
                         sh "ls -a"
                 }
@@ -30,7 +30,7 @@ pipeline {
                     sh "set -a"
                     sh "pwd"
                     sh "ls -a"
-                    sh ". ./.env"
+                    sh ". ./env.txt"
                     sh "set +a"
                     
                     sh "docker network create —driver=bridge testing"
