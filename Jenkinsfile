@@ -35,6 +35,8 @@ pipeline {
                 steps {
 
                     sh "set -a"
+                    sh "pwd"
+                    sh "ls -a"
                     sh "source .env"
                     sh "set +a"
                     
