@@ -22,7 +22,7 @@ pipeline {
              }
              stage ("Build") {
                 steps {
-                    sh  "docker build -u root -t mmbatteries/db:latest ./postgres_db"
+                    sh  "docker build --tmpfs /.config -t mmbatteries/db:latest ./postgres_db"
                     sh "docker build -t mmbatteries/app:latest ./flask_app"
                 }
              }
