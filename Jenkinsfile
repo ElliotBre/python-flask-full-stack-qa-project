@@ -8,9 +8,9 @@ pipeline {
                 steps {
                     sh "rm -rf qa_project"
                     sh "ls -a"
-                    //checkout scmGit(
-                        //branches: [[name: 'main']],
-                        //userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
+                    checkout scmGit(
+                        branches: [[name: 'main']],
+                        userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
                         sh "ls -a"
                         sh "touch .env"
                         withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
