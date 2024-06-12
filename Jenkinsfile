@@ -5,9 +5,6 @@ pipeline {
     }
         stages {
             stage ("Setup") {
-                environment {
-                HOME = "${env.WORKSPACE}"
-                }
                 steps {
                     sh "rm -rf qa_project"
                     sh "ls -a"
@@ -24,9 +21,6 @@ pipeline {
                 }
              }
              stage ("Build") {
-                environment {
-                HOME = "${env.WORKSPACE}"
-                }
                 steps {
                     script {
                      image = docker.build("test-image", "./postgres_db") 
