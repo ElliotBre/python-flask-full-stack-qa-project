@@ -47,7 +47,7 @@ pipeline {
           sh "rm env.sh"
           sh "docker stop \$(docker ps -aq) && docker remove \$(docker ps -aq)"
           sh "docker network rm testing"
-          sh "docker system prune"
+          sh "docker system prune -f"
       }
     }
 }
