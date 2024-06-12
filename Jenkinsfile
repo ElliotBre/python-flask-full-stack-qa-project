@@ -30,6 +30,7 @@ pipeline {
                     sh "set -a"
                     sh "pwd"
                     sh "ls -a"
+                    sh "cat env.txt"
                     sh "source env.txt"
                     sh "set +a"
                     
