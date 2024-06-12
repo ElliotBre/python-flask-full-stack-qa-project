@@ -1,26 +1,27 @@
 pipeline {
     agent any
         stages {
-            stage ("Setup") {
+            stage ("intit") {
                 steps {
                     sh "rm -rf temp"
-                    sh "ls -a"
                     sh "mkdir temp"
-                    sh "cd temp"
+                }
+            }
+            stage ("Setup") {
+                environment { HOME = "${env.WORKSPACE/temp}" }
+                steps {
+                    sh "rm env.sh"
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
-                        sh "ls -a"
-                        sh "touch .env"
+                        sh "cd temp touch env.sh"
                         withCredentials([file(credentialsId: 'env.sh', variable: 'ENV')]){
-                            sh "ls -a"
                             sh "cd temp cp \$ENV env.sh"
-                            sh "cat env.sh"
                         }
-                        sh "ls -a"
                 }
              }
              stage ("Build") {
+                environment { HOME = "${env.WORKSPACE/temp}" }
                 steps {
                     sh "git submodule init"
                     sh "git submodule update"
@@ -29,6 +30,7 @@ pipeline {
                 }
              }
              stage ("Run") {
+                environment { HOME = "${env.WORKSPACE/temp}" }
                 steps {
                     script {
                        load './env.sh'
@@ -42,6 +44,7 @@ pipeline {
                 }
              }
             stage ("Archive build artifacts") {
+                environment { HOME = "${env.WORKSPACE/temp}" }
                 steps {
                     sh "docker push mmbatteries/db:latest"
                     sh "docker push mmbatteries/app:latest"
