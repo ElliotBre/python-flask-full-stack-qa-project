@@ -50,4 +50,10 @@ pipeline {
                 }
             }
         }
+    post {
+      always {
+          sh "docker network rm testing"
+          sh "docker stop $(docker ps -aq) && docker remove $(docker ps -aq)"
+      }
+    }
 }
