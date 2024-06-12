@@ -12,9 +12,9 @@ pipeline {
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/qa_project.git']])
                         sh "ls -a"
                         sh "touch .env"
-                        withCredentials([file(credentialsId: '.env', variable: 'ENV')]){
-                            sh "cp \$ENV .env"
-                            sh "cat .env"
+                        withCredentials([file(credentialsId: 'env.sh', variable: 'ENV')]){
+                            sh "cp \$ENV env.sh"
+                            sh "cat env.sh"
                         }
                         sh "ls -a"
                 }
@@ -30,7 +30,7 @@ pipeline {
              stage ("Run") {
                 steps {
                     sh "set -a"
-                    sh ". ./.env"
+                    sh ". ./env.sh"
                     sh "set +a"
                     
                     sh "docker network create --driver=bridge testing"
