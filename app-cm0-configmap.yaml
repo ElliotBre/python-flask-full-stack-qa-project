@@ -1,0 +1,39 @@
+apiVersion: v1
+data:
+  .git: |
+    gitdir: ../.git/modules/flask_app
+  .pre-commit-config.yaml: |
+    repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.5.0
+      hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+    - repo: https://github.com/pre-commit/mirrors-autopep8
+      rev: v1.5.4
+      hooks:
+      - id: autopep8
+  Dockerfile: |-
+    FROM python:3.6
+
+    WORKDIR /app
+
+    COPY . /app/
+
+    RUN pip install -r requirements.txt
+
+    EXPOSE 5000
+
+    ENTRYPOINT ["python3","src/app.py"]
+  requirements.txt: |
+    autopep8
+    pre-commit
+    psycopg2-binary
+    flask
+    virtualenv
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: app
+  name: app-cm0
