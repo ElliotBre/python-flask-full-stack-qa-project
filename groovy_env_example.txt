@@ -1,0 +1,9 @@
+env.DATABASE_USER=""
+env.DATABASE_PASSWORD=""
+env.DATABASE_NAME=""
+env.DATABASE_HOST=""
+env.DATABASE_PORT=
+env.FLASK_ENV=""
+env.FLASK_APP=""
+env.FLASK_DEBUG=""
+env.PORT=""
