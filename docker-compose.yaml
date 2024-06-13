@@ -4,9 +4,7 @@ networks:
     driver: bridge
 services:
   db:
-    build:
-      context: postgres_db
-      dockerfile: Dockerfile
+    image: mmbatteries/db:latest
     restart: always
     env_file: ./.env
     environment:
@@ -27,9 +25,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    build:
-      context: flask_app
-      dockerfile: Dockerfile
+    image: mmbatteries/app:latest
     restart: always
     environment: 
       - DATABASE_NAME=$DATABASE_NAME
