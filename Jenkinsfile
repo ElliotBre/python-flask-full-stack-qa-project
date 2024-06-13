@@ -46,6 +46,11 @@ pipeline {
                     sh "rm -rf temp"
                 }
             }
+            stage ("Running minikube") {
+                steps {
+                    sh "kubectl apply -f app-service.yaml,db-service.yaml,nginx-service.yaml,app-deployment.yaml,db-deployment.yaml,app-cm0-configmap.yaml,env-configmap.yaml,db-persistentvolumeclaim.yaml,nginx-deployment.yaml,nginx-cm0-configmap.yaml"
+                }
+            }
         }
     post {
       always {
