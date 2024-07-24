@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker-agent-1'}
     environment {
         DOCKER_ID = credentials('DOCKER_ID')
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
